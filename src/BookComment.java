@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 enum CommentType {
     NOTE,
@@ -145,7 +146,8 @@ public class BookComment {
             return newFormat;
 
         // no clue whats going on with these IDs, so I will just create them randomly (seems like HEX)
-        newFormat.add("<div id=\"" + "randomstr" + "\" class=\"bookmark bm-color-cian\">");
+        String idStr = createRandomHexString(8) + "-" + createRandomHexString(4) + "-" + createRandomHexString(4) + "-" + createRandomHexString(4) + "-" + createRandomHexString(12);
+        newFormat.add("<div id=\"" + idStr + "\" class=\"bookmark bm-color-cian\">");
         newFormat.add("\t<p class=\"bm-page\">" + pages + "</p>"); // TODO: handle multiple pages, i.e. 120-121
         newFormat.add("\t<div class=\"bm-text\">");
         newFormat.add("\t\t<p>" + quote + "</p>");
@@ -159,6 +161,18 @@ public class BookComment {
         newFormat.add("</div>");
 
         return newFormat;
+    }
+
+    private String createRandomHexString(int len)
+    {
+        // to prevent overflows, we manually create each value and concatanate
+        String out = "";
+        Random rand = new Random();
+        for(int i = 0; i < len; i++)
+        {
+            out += String.format("%01x", rand.nextInt(16)).toUpperCase();
+        }
+        return out;
     }
 
 }
