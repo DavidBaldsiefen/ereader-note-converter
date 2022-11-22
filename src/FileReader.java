@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.List;
 
 public class FileReader {
-    public static List<String> readOldFormat(String filename)
+    public static List<String> readFile(String filename)
     {
         File file;
         Scanner scanner;

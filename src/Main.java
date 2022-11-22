@@ -10,7 +10,7 @@ public class Main {
     public static void create_pocketbook_files(String oldFormatFile) {
 
         // read and decode the old file
-        List<String> lines = FileReader.readOldFormat("files/example_notes_old.txt");
+        List<String> lines = FileReader.readFile("files/example_notes_old.txt");
         List<List<String>> commentStrings = FileReader.splitCommentsOldFormat(lines);
         List<BookComment> bookComments = new ArrayList<>();
         for(List<String> commentString : commentStrings)
@@ -33,13 +33,14 @@ public class Main {
             List<BookComment> booksComments = new ArrayList<>();
             for(BookComment bc : bookComments)
             {
-                if((bc.bookAuthor + "_" + bc.bookTitle) == bookTitle)
+                if((bc.bookAuthor + "_" + bc.bookTitle).equals(bookTitle))
                 {
                     booksComments.add(bc);
                 }
             }
             // now the list contains all comments of the book. Therefore, we can create the output file
-            // TODO
+            cFileWriter.writeNewFormat(booksComments);
+            // TODO: indendation and formatting in resulting file not yet ideal
         }
 
     }
