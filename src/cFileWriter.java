@@ -27,7 +27,7 @@ public class cFileWriter {
         outLines.add("\t<body>");
         outLines.add("\t\t<div class=\"bookmark bm-color-note\">");
         outLines.add("\t\t\t<h1>" + title + "</h1>");
-        outLines.add("\t\t</div");
+        outLines.add("\t\t</div>");
         outLines.add("\t\t<div class=\"bookmark bm-color-note\">");
         outLines.add("\t\t\t<span>" + author + "</span>");
         outLines.add("\t\t</div>");
