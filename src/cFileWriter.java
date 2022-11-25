@@ -24,6 +24,12 @@ public class cFileWriter {
         List<String> outLines = new ArrayList<>();
         outLines.add("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\">");
         outLines.addAll(header);
+
+        // add the book hash one line before the end of the header
+        String bookHash = BookComment.createRandomHexString(32); // yup, pretty sure this should *not* be random
+        outLines.add(outLines.size() - 1, "\t<script type=\"application/x-pocketbook-dbdump\" book_hash=\"" + bookHash + "\"></script>");
+
+        // begin the body
         outLines.add("\t<body>");
         outLines.add("\t\t<div class=\"bookmark bm-color-note\">");
         outLines.add("\t\t\t<h1>" + title + "</h1>");
@@ -49,7 +55,7 @@ public class cFileWriter {
         try {
             File outFile = new File(filename);
             if (!outFile.createNewFile()) {
-                System.out.println("Could not create file " + filename);
+                System.out.println("Could not create file " + filename +". Does it already exist?");
                 return;
             }
         } catch (IOException ex) {

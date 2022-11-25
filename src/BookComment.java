@@ -163,7 +163,7 @@ public class BookComment {
         return newFormat;
     }
 
-    private String createRandomHexString(int len)
+    public static String createRandomHexString(int len)
     {
         // to prevent overflows, we manually create each value and concatanate
         String out = "";

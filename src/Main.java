@@ -4,13 +4,18 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        create_pocketbook_files("files/example_notes_old.txt");
+        if(args.length != 1)
+        {
+            System.out.println("Please provide one (1) command line argument conatining the path to the old notes file.");
+            return;
+        }
+        create_pocketbook_files(args[0]);
     }
 
     public static void create_pocketbook_files(String oldFormatFile) {
 
         // read and decode the old file
-        List<String> lines = FileReader.readFile("files/example_notes_old.txt");
+        List<String> lines = FileReader.readFile(oldFormatFile);
         List<List<String>> commentStrings = FileReader.splitCommentsOldFormat(lines);
         List<BookComment> bookComments = new ArrayList<>();
         for(List<String> commentString : commentStrings)
